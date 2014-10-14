@@ -8,25 +8,10 @@ The current build system and test system uses the built in gyp, gtest, and
 gmock.  When it is open sourced the open sourced version must use the open
 sourced versions of those.
 
-BUILD
+CUSTOMIZING
 
-To build for OSX
-./Scripts/regenerate_projects.sh
-
-To build for iOS
-<coming>
-
-TESTING:
-Get sample content and rename as they are in the gyp file from
-  https://docs.google.com/a/google.com/document/d/1-XUJm9hEiXs6ecqhv45jTb5RSvlWvXIYQIkffYASttU/edit#
-Modify gyp file to uncomment the video/audio files.
-Build DashToHlsTests
-Run DashToHlsTests target
-All tests should pass
-An output file called /tmp/out.ps should be created.
-out.ts is a 5 second video only segment of the dash output.
-out.ts should be playable with VLC.
-
+  Common.gypi must be customized.
+  library/mac_test_files.mm needs to be populated with your content.
 
 
 H.264 QUICK TUTORIAL.
@@ -79,3 +64,4 @@ up a constant amount the PTS will jump all over the place.
 Some devices need an SCR/PCR before the DTS to give time for decoding after
 the packets are guaranteed to arrive.  This is called buffer time.
 While this library allows a buffer time it is expected to have a 0 buffer
+time (SCR == DTS).
